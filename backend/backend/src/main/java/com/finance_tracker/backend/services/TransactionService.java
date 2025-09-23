@@ -42,7 +42,7 @@ public class TransactionService {
                 .orElseThrow(() -> new EntityNotFoundException("Category with id " + dto.getCategoryId() + " not found"));
 
         Transaction transaction = Transaction.builder()
-                .date(dto.getDate())
+                .date(dto.getDate().atStartOfDay())
                 .user(user)
                 .category(category)
                 .type(dto.getType())
@@ -56,7 +56,7 @@ public class TransactionService {
     public Transaction updateTransaction(Long id, UpdateTransactionDto dto) {
         Transaction transaction = getTransaction(id);
 
-        if (dto.getDate() != null) transaction.setDate(dto.getDate());
+        if (dto.getDate() != null) transaction.setDate(dto.getDate().atStartOfDay());
         if (dto.getAmount() != null) transaction.setAmount(dto.getAmount());
         if (dto.getDescription() != null) transaction.setDescription(dto.getDescription());
         if (dto.getType() != null) transaction.setType(dto.getType());
