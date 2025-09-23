@@ -1,5 +1,6 @@
 package com.finance_tracker.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.finance_tracker.backend.models.Category;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,9 +21,11 @@ public class BudgetCategory {
 
     @ManyToOne
     @JoinColumn(name = "budget_id", nullable = false)
+    @JsonIgnoreProperties("categories")
     private Budget budget;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
+    @JsonIgnoreProperties("budgets")
     private Category category;
 }

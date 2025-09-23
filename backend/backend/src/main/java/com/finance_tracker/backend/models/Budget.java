@@ -1,5 +1,6 @@
 package com.finance_tracker.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.finance_tracker.backend.models.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,9 +24,11 @@ public class Budget {
     private Float estimatedRevenue;
 
     @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("budget")
     private List<BudgetCategory> categories;
 
     @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("budget")
     private List<BudgetUser> users;
 
     private Boolean alertOverbudget = false;
